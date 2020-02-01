@@ -8,7 +8,8 @@ package features;
  *
  */
 
-//Example 3-27. A simple Book class
+//Exercise 3-27. A simple Book class
+//Exercise 4-13. A simple POJO representing a book
 public class Book {
 
 	private Integer id; private String title;
