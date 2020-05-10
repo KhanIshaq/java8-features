@@ -6,7 +6,7 @@ package features;
 import java.util.stream.IntStream;
 
 /**
- * @author nsa
+ * @author ishaqkhan
  *
  */
 public class Primes {

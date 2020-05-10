@@ -6,7 +6,7 @@ package features;
 import java.text.NumberFormat;
 
 /**
- * @author nsa
+ * @author ishaqkhan
  *	Exercise 3-43. Team class contains id, name, and salary
  */
 

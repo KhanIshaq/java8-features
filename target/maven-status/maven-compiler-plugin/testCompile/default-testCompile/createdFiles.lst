@@ -1,0 +1,7 @@
+features/SequentialStreamTest.class
+features/PrimesTest.class
+features/Adjusters.class
+features/ParallelStreamTest.class
+features/Test.class
+features/ImplementPredicateTest.class
+features/TimePackageTest.class

@@ -3,8 +3,6 @@
  */
 package features;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -13,7 +11,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * @author nsa
+ * @author ishaqkhan
  *
  */
 public class ImplementPredicate {

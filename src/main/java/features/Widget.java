@@ -4,7 +4,7 @@
 package features;
 
 /**
- * @author nsa
+ * @author ishaqkhan
  *
  */
 public class Widget {

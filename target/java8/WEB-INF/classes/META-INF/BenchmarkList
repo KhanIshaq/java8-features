@@ -1,0 +1,2 @@
+JMH S 21 features.DoublingDemo S 60 features.generated.DoublingDemo_doubleAndSumParallel_jmhTest S 20 doubleAndSumParallel S 11 AverageTime E A 1 1 1 E E E E E E E I 1 2 E E L 2 6 -Xms4G 6 -Xmx4G E E E U 12 MILLISECONDS E E 
+JMH S 21 features.DoublingDemo S 62 features.generated.DoublingDemo_doubleAndSumSequential_jmhTest S 22 doubleAndSumSequential S 11 AverageTime E A 1 1 1 E E E E E E E I 1 2 E E L 2 6 -Xms4G 6 -Xmx4G E E E U 12 MILLISECONDS E E 

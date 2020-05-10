@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 
 /**
- * @author nsa
+ * @author ishaqkhan
  *
  *The interfaces in java.util.function fall into four categories: (1) consumers, (2) suppliers, (3) predicates, and (4) functions. 
  *Consumers take a generic argument and return nothing. 

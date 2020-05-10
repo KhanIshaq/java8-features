@@ -3,8 +3,6 @@
  */
 package features;
 
-import static org.junit.Assert.assertTrue;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,7 +25,7 @@ import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
 /**
- * @author nsa
+ * @author ishaqkhan
  *
  */
 public class Chapter3 {

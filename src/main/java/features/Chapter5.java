@@ -3,7 +3,6 @@
  */
 package features;
 
-import static org.junit.Assert.assertTrue;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -27,11 +26,10 @@ import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import org.junit.Test;
-
 /**
- * @author nsa
- * Chapter 5 : Issues with Streams, Lambdas, and Method References
+ * @author ishaqkhan
+ * Chapter 5
+ * Issues with Streams, Lambdas, and Method References
  */
 public class Chapter5 {
 	
@@ -453,13 +451,6 @@ public class Chapter5 {
 			 .collect(Collectors.toList());
 	}
 	
-	//Exercise 5-2. Testing the  later
-	@Test
-	public void testNonNulls() throws Exception { List<String> strings =
-	        Arrays.asList("this", "is", "a", "list", "of", "strings");
-		assertTrue(Objects.deepEquals(strings, nonNullStrings));
-	}
-	
 	//Generalized
 	//Exercise 5-3 filters nulls out of any list.
 	public <T> List<T> getNonNullElements(List<T> list){
@@ -500,7 +491,8 @@ public class Chapter5 {
 		// initialize each word count with zero
 		Arrays.stream(strings).forEach(s -> wordCounts.put(s, 0));
 		
-		Arrays.stream(passage.toLowerCase().replaceAll("\\W", " ").split("\\s+")).forEach(word -> wordCounts.computeIfPresent(word, (key,val) -> val+1 ));
+		Arrays.stream(passage.toLowerCase().replaceAll("\\W", " ").split("\\s+"))
+		.forEach(word -> wordCounts.computeIfPresent(word, (key,val) -> val+1 ));
 		
 		return wordCounts;
 	

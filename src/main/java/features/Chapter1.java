@@ -3,9 +3,9 @@
  */
 package features;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 // method references are not supported in -source 1.5
 
 /**
- * @author nsa
+ * @author ishaqkhan
  *
  *	object::instanceMethod
  *	Refer to an instance method using a reference to the supplied object, as in
@@ -84,12 +84,12 @@ public class Chapter1 {
 		List<Person> p3 = Stream.of(before).collect(Collectors.toList());
 		Person after = p3.get(0);
 		
-		assertTrue(before == after);
-		System.out.println("assertTrue = " + before.equals(after)); // Equals
-		
-		before.setName("Grace Murray Hopper");
-		assertEquals("Grace Murray Hopper", after.getName());
-		System.out.println("assertEquals = " + before.getName().equals(after.getName())); // Equals
+//		assertTrue(before == after);
+//		System.out.println("assertTrue = " + before.equals(after)); // Equals
+//		
+//		before.setName("Grace Murray Hopper");
+//		assertEquals("Grace Murray Hopper", after.getName());
+//		System.out.println("assertEquals = " + before.getName().equals(after.getName())); // Equals
 		
 		
 		//Exercise 1-18. Using the copy constructor
@@ -101,9 +101,9 @@ public class Chapter1 {
 		//assertFalse(before == after); // Different Objects
 		System.out.println("assertFalse = " + before.equals(after));
 		//assertEquals(before, after); // Equivalent but different Objects
-		before.setName("Rear Admiral Dr. Grace Murray Hopper");
-		assertFalse(before.equals(after));
-		System.out.println("assertFalse = " + before.equals(after));
+//		before.setName("Rear Admiral Dr. Grace Murray Hopper");
+//		assertFalse(before.equals(after));
+//		System.out.println("assertFalse = " + before.equals(after));
 		
 		
 		List<Person> p5 = names.stream()
