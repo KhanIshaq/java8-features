@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   <version>1.0</version>
   <name>java8 Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/khanishaq</url>
   <properties>
         <jmh.version>1.21</jmh.version>
    </properties>
@@ -22,6 +22,21 @@
 	    <version>${jmh.version}</version>
 	    <!-- <scope>test</scope>  -->
 	</dependency>
+	<dependency>
+	    <groupId>org.jsoup</groupId>
+	    <artifactId>jsoup</artifactId>
+	    <version>1.11.3</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+		<version>2.8.2</version>
+	</dependency>
+	<dependency>
+		<groupId>com.squareup.okhttp3</groupId>
+		<artifactId>okhttp</artifactId>
+		<version>3.10.0</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -32,21 +47,46 @@
   <build>
     <finalName>java8</finalName>
     <plugins>
-    <plugin>    
-    	<groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-            <annotationProcessorPaths>
-	            <path>
-	                <groupId>org.openjdk.jmh</groupId>
-	                <artifactId>jmh-generator-annprocess</artifactId>
-	                <version>${jmh.version}</version>
-	            </path>
-        	</annotationProcessorPaths>
-        </configuration>
-    </plugin>
-</plugins>
+	    <plugin>    
+	    	<groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-compiler-plugin</artifactId>
+	        <configuration>
+	            <source>1.8</source>
+	            <target>1.8</target>
+	            <annotationProcessorPaths>
+		            <path>
+		                <groupId>org.openjdk.jmh</groupId>
+		                <artifactId>jmh-generator-annprocess</artifactId>
+		                <version>${jmh.version}</version>
+		            </path>
+	        	</annotationProcessorPaths>
+	        </configuration>
+	    </plugin>
+	    <!-- 
+	    <plugin>
+    		<groupId>org.codehaus.mojo</groupId>
+    		<artifactId>exec-maven-plugin</artifactId>
+    		<executions>
+    			<execution>
+    				<id>run-benchmarks</id>
+    				<phase>integration-test</phase>
+    				<goals>
+    					<goal>exec</goal>
+    				</goals>
+    				<configuration>
+		                <classpathScope>test</classpathScope>
+		                <executable>java</executable>
+		                <arguments>
+		                    <argument>-classpath</argument>
+		                    <classpath />
+		                    <argument>org.openjdk.jmh.Main</argument>
+		                    <argument>.*</argument>
+		                </arguments>
+		            </configuration>
+    			</execution>
+    		</executions>
+    	</plugin>
+    	 -->
+	</plugins>
   </build>
 </project>

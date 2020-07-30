@@ -82,6 +82,8 @@ public class Chapter6 {
 		 
 		 b = Pattern.matches("a*b", "aaaaab");
 		 System.out.println(b);
+		 b = Pattern.matches("a?b", "b");
+		 System.out.println(b);
 
 		//The Optional Type
 		 

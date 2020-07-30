@@ -491,7 +491,7 @@ public class Chapter5 {
 		// initialize each word count with zero
 		Arrays.stream(strings).forEach(s -> wordCounts.put(s, 0));
 		
-		Arrays.stream(passage.toLowerCase().replaceAll("\\W", " ").split("\\s+"))
+		Arrays.stream(passage.toLowerCase().replaceAll("\\d", ".").replaceAll("\\W", " ").split("\\s+"))
 		.forEach(word -> wordCounts.computeIfPresent(word, (key,val) -> val+1 ));
 		
 		return wordCounts;
@@ -502,7 +502,7 @@ public class Chapter5 {
 	//Exercise 5-12. Using the merge method
 	public static Map<String, Integer> fullWordCounts(String passage) { 
 		Map<String, Integer> wordCounts = new HashMap<>();
-		String testString = passage.toLowerCase().replaceAll("\\W"," ");
+		String testString = passage.toLowerCase().replaceAll("\\d",".").replaceAll("\\W"," ");
 	    Arrays.stream(testString.split("\\s+")).forEach(word ->
 	        wordCounts.merge(word, 1, Integer::sum));
 	    return wordCounts; 

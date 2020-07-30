@@ -1,6 +1,7 @@
 /Users/nsa/Documents/eclipseWorkspace_2018_09/java8/src/test/java/features/ParallelStreamTest.java
 /Users/nsa/Documents/eclipseWorkspace_2018_09/java8/src/test/java/features/PrimesTest.java
 /Users/nsa/Documents/eclipseWorkspace_2018_09/java8/src/test/java/features/SequentialStreamTest.java
+/Users/nsa/Documents/eclipseWorkspace_2018_09/java8/src/test/java/features/CompletableFutureTest.java
 /Users/nsa/Documents/eclipseWorkspace_2018_09/java8/src/test/java/features/TimePackageTest.java
 /Users/nsa/Documents/eclipseWorkspace_2018_09/java8/src/test/java/features/ImplementPredicateTest.java
 /Users/nsa/Documents/eclipseWorkspace_2018_09/java8/src/test/java/features/Adjusters.java

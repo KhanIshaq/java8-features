@@ -83,7 +83,7 @@ public class Chapter1 {
 		Person before = new Person("Grace Hopper");
 		List<Person> p3 = Stream.of(before).collect(Collectors.toList());
 		Person after = p3.get(0);
-		
+		System.out.println("------<|>------");
 //		assertTrue(before == after);
 //		System.out.println("assertTrue = " + before.equals(after)); // Equals
 //		
@@ -187,5 +187,8 @@ public class Chapter1 {
 			    .collect(Collectors.toList());
 		
 		System.out.println("6. "+ sorted);
+		
+		sorted = bonds.stream().sorted().collect(Collectors.toList());
+		System.out.println("7. "+ sorted);
 	}
 }

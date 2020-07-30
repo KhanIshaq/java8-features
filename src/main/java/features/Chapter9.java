@@ -5,6 +5,8 @@ package features;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,6 +27,9 @@ import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
+import cf.GamePageParser;
+import cf.GamePageLinksSupplier;
+
 /**
  * @author ishaqkhan
  * CHAPTER 9 
@@ -39,6 +44,7 @@ public class Chapter9 {
 	public static void main(String[] args) {
 		
 		
+		@SuppressWarnings("unchecked")
 		Map m = Collections.synchronizedMap(new HashMap());
 		//especially the java.util.concurrent package added in Java 5
 		//Concurrency is when multiple tasks can run in overlapping time periods
@@ -147,24 +153,25 @@ public class Chapter9 {
 	    //-Djava.util.concurrent.ForkJoinPool.common.parallelism=10 \
 	    //concurrency.CommonPoolSize
 	    //Pool size: 10
+		//The programmatic setting will override the settings of command-line
 	
 		//Example 9-14. Creating your own ForkJoinPool
-//		ForkJoinPool pool = new ForkJoinPool(4); 
-//		ForkJoinTask<Long> task = pool.submit(
-//		    () -> LongStream.rangeClosed(1, 1_000_000)
-//		                    .parallel()
-//		                    .sum());
-//		
-//		try {
-//			total1 = task.get();
-//		} catch (InterruptedException | ExecutionException e) { 
-//			e.printStackTrace();
-//		}finally { 
-//			pool.shutdown();
-//		}
-//		poolSize = pool.getPoolSize();
-//		System.out.println("Total: " + total1);
-//		System.out.println("Pool size:: " + poolSize);
+		ForkJoinPool pool = new ForkJoinPool(4); 
+		ForkJoinTask<Long> task = pool.submit(
+		    () -> LongStream.rangeClosed(1, 1_000_000)
+		                    .parallel()
+		                    .sum());
+		
+		try {
+			total1 = task.get();
+		} catch (InterruptedException | ExecutionException e) { 
+			e.printStackTrace();
+		}finally { 
+			pool.shutdown();
+		}
+		poolSize = pool.getPoolSize();
+		System.out.println("Total: " + total1);
+		System.out.println("Pool size:: " + poolSize);
 
 	
 		//9.4 The Future Interface
@@ -241,17 +248,94 @@ public class Chapter9 {
 		//Solution
 		//Use various instance methods in CompletableFuture that coordinate actions, like thenApply, thenCompose, thenRun, and more.
 		
+		
 		//consider the following process:
 		//• Ask a Supplier for a string holding a number
 		//• Parse the number into an integer
 		//• Double the number
 		//• Print it
+		//Exercise 9-23
+		CompletableFuture.supplyAsync(() -> sleepThenReturnString())
+		 .thenApply(Integer::parseInt)
+		 .thenApply(n -> n*2)
+		 //.thenAccept(System.out::println)
+		 .thenAccept(n -> {Thread t = Thread.currentThread(); System.out.println(n + " executed using " + t.getName());});
+		 //.join();
+		System.out.println("ForkJoinPool CF is Running ...");
 		
+		//9-1: Coordinating methods of Completable Future
+//		Modifier(s)			ReturnType							MethodName		Arguments
+//		-----------			----------							----------		----------
+//							CompletableFuture<Void>				acceptEither	CompletionStage<? extends T> other, Consumer<? super T> action
+//		static				CompletableFuture<Void>				allOf			CompletableFuture<?>... cfs
+//		static				CompletableFuture<Object>			anyOf			CompletableFuture<?>... cfs
+//		<U>					CompletableFuture<U>				applyToEither	CompletionStage<? extends T> other, Function<? super T, U> fn
+//							CompletableFuture<Void>				runAfterBoth	CompletionStage<?> other, Runnable action
+//							CompletableFuture<Void>				runAfterEither	CompletionStage<?> other, Runnable action
+//							CompletableFuture<Void>				thenAccept		Consumer<? super T> action
+//		<U>					CompletableFuture<U>				thenApply		Function<? super T> action,<? extends U> fn
+//		<U,V>				CompletableFuture<V>				thenCombine		CompletionStage<? extends U> other, BiFunction<? super T, ? super U, ? extends V> fn
+//		<U>					CompletableFuture<U>				thenCompose		Function<? super T, ? extends CompletionStage<U>> fn
+//							CompletableFuture<Void>				thenRun			Runnable action
+//							CompletableFuture<T>				whenComplete	BiConsumer<? super T, ? super Throwable> action
+		
+		
+//		runAsync and supplyAsync are factory methods
+//		CompletableFuture<Void> thenAccept(Consumer<? super T>  action)
+//		CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action)
+//		CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action, Executor executor)
+		
+		
+
+//		Exercise 9-24. Running CompletableFuture tasks on a separate thread pool
+		ExecutorService executor = Executors.newFixedThreadPool(4);
+		CompletableFuture.supplyAsync(() -> sleepThenReturnString(), executor)
+						 .thenApply(Integer::parseInt)
+						 .thenApply(n -> n*2)
+						 .thenAccept(n -> {Thread t = Thread.currentThread(); System.out.println(n + " executed using " + t.getName());})
+						 .join();
+		System.out.println("Executor Pool Running ...");
+		
+
+		//ForkJoinPool.commonPool().awaitQuiesence(long timeout, TimeUnit unit);
+		//awaitQuiescence method tells the system to wait until all the worker threads are idle, or until the given time period elapses, whichever comes first
+		
+		//get() and join() methods are blocking until the Future is completed
+		// get() throws checked ExecutionException
+		// join() throw unchecked CompletionException
+		
+		//boolean cancel(boolean mayInterruptIfRunning)
+		// uses CancellationException & other chained operations will get completed using CompletionException
+		//9-25
+		//9-26
+		
+		//<U> CompletableFuture<U> handle(BiFunction<? super T, Throwable, ? extends U> fn)
+		//<U> CompletableFuture<U> handleAsync(BiFunction<? super T, Throwable, ? extends U> fn, Executor executor)
+		
+		//handle - Returns Result of the Future if it completes normally or throws an exception 
 		
 		//9.7 Coordinating CompletableFutures, Part 2
 		//Use Case
 		//You want to see a larger example of coordinating CompletableFuture instances.
 		
+		//Solution
+		//Access set of webpages for each data in baseball season
+		//Contains links to games played
+		//Download the score box information for each game & transform to Java Class
+		//Asynchronously save the data
+		//compute the result for each
+		//find the highest total score
+		//print the max score & game
+		
+		
+		
+		// http://gd2.mlb.com/components/game/mlb/year_2017/month_05/day_05/
+		//GamePageLinksSupplier.getGamePageLinks(LocalDate.now());
+		
+		//The dateUntil() method added Java 9 to LocalDate produces a Stream<LocalDate>
+		
+		GamePageParser parser = new GamePageParser(); 
+		parser.printGames(LocalDate.of(2017, Month.MAY, 5), 3);
 		//TimeoutException
 		
 	}
@@ -259,8 +343,8 @@ public class Chapter9 {
 	//Exercise 9-23. Coordinating tasks using Completable Future
 	public static String sleepThenReturnString() { 
 		try {
-			Thread.sleep(100);
-		} catch (InterruptedException ignored) {
+			Thread.sleep(1000);
+		}catch (InterruptedException e) {
 			
 		}
 		return "42";

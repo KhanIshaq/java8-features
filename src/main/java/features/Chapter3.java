@@ -98,7 +98,7 @@ public class Chapter3 {
 		names = bradyBunch.stream()
 		    .collect(Collectors.joining(","));
 		System.out.println(names);
-		/*
+		
 		//Child Interfaces of Streams
 //		static IntStream range(int startInclusive, int endExclusive)
 //		static IntStream rangeClosed(int startInclusive, int endInclusive) 
@@ -324,11 +324,11 @@ public class Chapter3 {
 		System.out.println(sorted1);
 		
 		//Exercise 3-31. Testing that strings are sorted properly
-		sorted1.stream()
-		.reduce((prev,curr) -> {
-			assertTrue(prev.length() <= curr.length());
-			return curr; //curr becomes the next value of prev
-		});
+//		sorted1.stream()
+//		.reduce((prev,curr) -> {
+//			assertTrue(prev.length() <= curr.length());
+//			return curr; //curr becomes the next value of prev
+//		});
 		System.out.println("Junit Test Asserted True that Array is sorted");
 		
 		//3.5 Debugging Streams with peek
@@ -342,7 +342,6 @@ public class Chapter3 {
 		//Stream<T> peek(Consumer<? super T> action)
 		//Exercise 3-34. Using multiple peek methods
 		System.out.println("Div Verbose Peek = " + sumDoublesDivisibleByThreeP(1,10));
-		*/
 		
 	
 		//3.6	Converting Strings to Streams and Back		
@@ -377,8 +376,8 @@ public class Chapter3 {
 		
 		//The Stream interface has a default method called count that returns a long
 		//Exercise 3-39. Counting elements in a stream
-		long count = Stream.of(3, 1, 4, 1, 5, 9, 2, 6, 5).count(); 
-		System.out.printf("There are %d elements in the stream%n", count);
+		long counting = Stream.of(3, 1, 4, 1, 5, 9, 2, 6, 5).count(); 
+		System.out.printf("There are %d elements in the stream%n", counting);
 		
 		//One interesting feature of the count method is that the Javadocs show how it is
 		//implemented. The docs say, “this is a special case of a reduction and is equivalent to”:
@@ -396,14 +395,14 @@ public class Chapter3 {
 		//and the values would be lists of even- and odd-length strings.
 		Map<Boolean, Long> numberLengthMap = bradyBunch.stream()
 				.collect(Collectors.partitioningBy(
-				s -> s.length() % 2 == 0, // Predicate 
+				s0 -> s0.length() % 2 == 0, // Predicate 
 				Collectors.counting())); // Downstream Collector
 		
 		numberLengthMap.forEach((k,v) -> System.out.printf("%5s: %d%n", k, v));
 				
 		Map<Boolean, Long> countLenghtMap = bradyBunch.stream()
 				.collect(Collectors.partitioningBy(
-						s -> s.length() % 3 == 0, Collectors.counting()));
+						s0 -> s0.length() % 3 == 0, Collectors.counting()));
 		
 		countLenghtMap.forEach((k,v) -> System.out.printf("%5s: %d%n", k, v));
 		//The Collectors methods are intended for downstream post- processing of a partitioningBy or groupingBy operation.
@@ -481,7 +480,7 @@ public class Chapter3 {
 		Optional<Integer> firstEven1 = Stream.of(3, 1, 4, 1, 5, 9, 2, 6, 5)
 		    .parallel()
 		    .filter(n->n%2==0)
-		    .findFirst();
+		    .findAny();
 		System.out.println(firstEven1);
 		//encounter order is parallel
 		//Prints Optional.empty
@@ -625,9 +624,9 @@ public class Chapter3 {
 		//Exercise 3-60. Concatenating multiple streams
 		Stream<String> first = Stream.of("a", "b", "c").parallel(); 
 		Stream<String> second = Stream.of("X", "Y", "Z"); 
-		List<String> strings4 = Stream.concat(first, second)
+		List<String> strings04 = Stream.concat(first, second)
 	            .collect(Collectors.toList());
-		System.out.println(strings4);
+		System.out.println(strings04);
 		
 		Stream<String> third = Stream.of("alpha", "beta", "gamma"); 
 
@@ -657,7 +656,7 @@ public class Chapter3 {
 	    List<String> strings7 = Stream.of(first, second, third, fourth)
 	    		.flatMap(Function.identity())
 	    		.collect(Collectors.toList());
-	    System.out.println(strings7);
+	    System.out.println("7. " + strings7);
 	    
 	    first = Stream.of("a", "b", "c").parallel(); 
 		second = Stream.of("X", "Y", "Z"); 

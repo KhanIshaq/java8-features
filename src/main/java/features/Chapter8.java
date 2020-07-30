@@ -402,7 +402,7 @@ public class Chapter8 {
 	
 	//Exercise 8-41. Using Period to get days, months, and years
 	public static void getYearsMonthsDaysFromPeriod() {
-		LocalDate electionDay = LocalDate.of(2020, Month.NOVEMBER, 3);
+		LocalDate electionDay = LocalDate.of(2020, Month.NOVEMBER, 9);
 		LocalDate today = LocalDate.now();
 		Period until = today.until(electionDay);
 		int years = until.getYears();

@@ -3,5 +3,6 @@ features/PrimesTest.class
 features/Adjusters.class
 features/ParallelStreamTest.class
 features/Test.class
+features/CompletableFutureTest.class
 features/ImplementPredicateTest.class
 features/TimePackageTest.class

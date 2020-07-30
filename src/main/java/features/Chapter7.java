@@ -91,6 +91,21 @@ public class Chapter7 {
 		//You want to process all the files in a directory as a Stream.
 		//try-with-resources block
 		//Exercise 7-6. Using Files.list(path)
+		System.out.println("Joining with more");
+		try(Stream<Path> list = Files.list(Paths.get("src","main","java"))){
+			list.forEach(System.out::println);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("Without Joining");
+		try(Stream<Path> list = Files.list(Paths.get("src/main/java"))){
+			list.forEach(p -> System.out.println(p.getFileName()));
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("------DirectoryNames------");
 		try(Stream<Path> list = Files.list(Paths.get("src/main/java"))){
 			list.forEach(System.out::println);
 			
@@ -111,6 +126,7 @@ public class Chapter7 {
 		//public static Stream<Path> walk(Path start, FileVisitOption... options)throws IOException
 		
 		//Exercise 7-7. Walking the tree
+		System.out.println("------Walking------");
 		try (Stream<Path> paths = Files.walk(Paths.get("src/main/java"))) { 
 			paths.forEach(System.out::println);
 		} catch (IOException e) { 

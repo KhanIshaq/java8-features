@@ -28,7 +28,7 @@ public class ImplementPredicate {
 	
 	//Exercise 2-7. Finding strings of a given length
 	public static String getNamesOfLength(int length, String... names) { 
-		return Arrays.stream(names).filter(s -> s.length() == length).collect(Collectors.joining(", "));
+		return Arrays.stream(names).filter( s -> s.length() == length).collect(Collectors.joining(", "));
 	}
 	
 	//Exercise 2-8. Finding strings that start with a given string
