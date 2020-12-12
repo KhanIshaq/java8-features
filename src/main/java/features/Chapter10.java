@@ -15,6 +15,11 @@ public class Chapter10 {
 	 */
 	public static void main(String[] args) {
 		//10.1 Modules in Jigsaw
+		
+		//JPMS = Java Platform Module System
+		//Reflection based library which is Spring and Hibernate
+		//--illegal-access=permit is allowed in Java 9
+		
 	}
 
 }
